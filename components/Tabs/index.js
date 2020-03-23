@@ -12,7 +12,7 @@ const topics = document.querySelector('.topics');
 
 axios.get("https://lambda-times-backend.herokuapp.com/topics")
 .then(response => {
-  console.log('Topics: ', response.data.topics)
+  // console.log('Topics: ', response.data.topics)
   const topicsResult = response.data.topics;
   
   topicsResult.forEach(element => {
@@ -24,5 +24,5 @@ axios.get("https://lambda-times-backend.herokuapp.com/topics")
   });
 })
 .catch(err => {
-  console.log('There has been an error')
+  console.log('There has been an error with the tabs')
 })
