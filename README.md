@@ -30,6 +30,8 @@ Edit this document to include your answers after each question. Make sure to lea
 
 1. What is the DOM?
 
+The Document Object Model is the overall structure of all the elements in a web page.
+
 2. What is an event?
 
 3. What is an event listener?
