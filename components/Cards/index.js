@@ -18,44 +18,55 @@
 //
 // Create a card for each of the articles and add the card to the DOM.
 
-const cardsCont = document.querySelector('cards-container');
+// tests
+// console.log(articleList[articleLength[0]])
+// console.log(idvLength[0])
+// console.log('articles', articleList);
+
+const cardsCont = document.querySelector('.cards-container');
 
 axios.get("https://lambda-times-backend.herokuapp.com/articles")
 .then(response => {
-  const articlesResult = response.data.articles;
-  console.log('articles', articlesResult);
-  
-  articlesResult.forEach((element, index) => {
-    // create DOM elements
-    const card = document.createElement('div');
-    const headline = document.createElement('div');
-    const author = document.createElement('div');
-    const imgCont = document.createElement('div');
-    const img = document.createElement('img');
-    const credit = document.createElement('span');
+  const articleList = response.data.articles; // an object of an array of objects {[{4 pairs}], [{4 pairs}], [{4 pairs}], [{4 pairs}]}
+  const articleLength = Object.keys(articleList);
+  const idvLength = articleList[articleLength[0]];
 
-    // assign classes/attribute
-    card.classList.add('card');
-    headline.classList.add('headline');
-    author.classList.add('author');
-    imgCont.classList.add('img-container');
-
-    //populate elements
-    img.setAttribute('src', element[index]['authorPhoto']);
-    credit.innerHTML = `By ${element[index]['authorName']}`;
-
-    // append structure
-    card.appendChild(headline);
-    card.appendChild(author);
-    author.appendChild(imgCont);
-    imgCont.appendChild(img);
-    card.appendChild(credit);
-
-    cardsCont.appendChild(card);
-
-    return card;
-  });
-})
+  // loop through 5 objects
+  for (let i = 0; i < articleLength.length; i++) {
+  // loop through array of each object
+    for (let j = 0; j < idvLength.length; j++) {
+      // create DOM elements
+      let card = document.createElement('div');
+      let headline = document.createElement('div');
+      let author = document.createElement('div');
+      let imgCont = document.createElement('div');
+      let img = document.createElement('img');
+      let credit = document.createElement('span');
+      
+      // assign classes/attribute
+      card.classList.add('card');
+      headline.classList.add('headline');
+      author.classList.add('author');
+      imgCont.classList.add('img-container');
+      
+      //populate elements
+      headline.innerHTML = idvLength[j]['headline'];
+      // img.setAttribute('src', idvLength[j]['authorPhoto']);
+      img.src = idvLength[j]['authorPhoto'];
+      credit.innerHTML = `By ${idvLength[j]['authorName']}`;
+      
+      // append structure
+      card.appendChild(headline);
+      card.appendChild(author);
+      author.appendChild(imgCont);
+      imgCont.appendChild(img);
+      card.appendChild(credit);
+      cardsCont.appendChild(card);
+      
+    }; // end for loop j
+  }; // end for loop i
+}) // end .then
 .catch(err => {
   console.log('There is an error with the cards')
+  console.log(err)
 })
