@@ -29,10 +29,11 @@ axios.get("https://lambda-times-backend.herokuapp.com/articles")
 .then(response => {
   const articleList = response.data.articles; // an object of an array of objects {[{4 pairs}], [{4 pairs}], [{4 pairs}], [{4 pairs}]}
   const articleLength = Object.keys(articleList);
-  const idvLength = articleList[articleLength[0]];
-
+  console.log(articleList);
+  
   // loop through 5 objects
   for (let i = 0; i < articleLength.length; i++) {
+    const idvLength = articleList[articleLength[i]];
   // loop through array of each object
     for (let j = 0; j < idvLength.length; j++) {
       // create DOM elements
